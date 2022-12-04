@@ -30,12 +30,12 @@ class MainActivity : AppCompatActivity() {
 
 
         //val myPost = Post(2,2, "Ruslan", "Ibragimov")
-        viewModel.pushPost2(2,2, "Ruslan", "Ibragimov")
+        viewModel.getPost()
         viewModel.myResponse.observe(this, Observer { response ->
             if (response.isSuccessful){
                 Log.d("Main", response.body().toString())
                 Log.d("Main", response.code().toString())
-                Log.d("Main", response.message().toString())
+                Log.d("Main", response.headers().toString())
             }else{
                 Toast.makeText(this, response.code(), Toast.LENGTH_LONG).show()
             }
