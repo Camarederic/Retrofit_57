@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
 
         //val myPost = Post(2,2, "Ruslan", "Ibragimov")
-        viewModel.getPost()
+        viewModel.getPost(auth = "11112222")
         viewModel.myResponse.observe(this, Observer { response ->
             if (response.isSuccessful){
                 Log.d("Main", response.body().toString())

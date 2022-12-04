@@ -6,6 +6,7 @@ import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.Headers
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -14,12 +15,9 @@ import retrofit2.http.QueryMap
 
 interface SimpleApi {
 
-    @Headers(
-        "Authorization: 123123123",
-        "Platform: Android"
-    )
-    @GET("posts")
-    suspend fun getPost(): Response<Post>
+
+    @GET("posts/1")
+    suspend fun getPost(@Header("Auth") auth: String): Response<Post>
 
     @GET("posts/{postNumber}")
     suspend fun getPost2(@Path("postNumber") number: Int): Response<Post>
@@ -28,18 +26,18 @@ interface SimpleApi {
     suspend fun getCustomPost(
         @Query("userId") userId: Int,
         @Query("_sort") sort: String,
-        @Query("_order") order:String
+        @Query("_order") order: String
     ): Response<List<Post>>
 
     @GET("posts")
     suspend fun getCustomPost2(
-        @Query("userId") userId:Int,
+        @Query("userId") userId: Int,
         @QueryMap options: Map<String, String>
-    ) :Response<List<Post>>
+    ): Response<List<Post>>
 
     @POST("posts")
     suspend fun pushPost(
-        @Body post :Post
+        @Body post: Post
     ): Response<Post>
 
     @FormUrlEncoded
